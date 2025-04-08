@@ -1,0 +1,193 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+(function(d, w) {
+	function getSrcGP() {
+		var scriptList = document.querySelectorAll('script');
+		var srcList = [];
+
+		scriptList.forEach(function(item) {
+			if (/\/GP.js$/.test(item.src)) {
+				srcList.push(item.src);
+			}
+		});
+
+		if (srcList.length === 1) {
+		    return srcList[0];
+		};
+		return '';
+	};
+	function isObject(val){
+		return typeof val === 'object' &&
+			!Array.isArray(val) &&
+			val !== null
+	};
+	function GeneralPixel(options) {
+		var _this = this;
+		this.options = {};
+		this.rtgMessage = {};
+		this.push = function(options) {
+			for (var key in options) {
+				this.options[key] = options[key];
+			}
+			checkOptions(this.options);
+		};
+		function checkOptions(options) {
+			if (options.type === 'GPID') {
+				getGrid(options);
+			}
+		}
+		function getGrid(options) {
+			var domain = /-src/.test(getSrcGP())
+				? 'https://web.archive.org/web/20220327065239/https://static-src.terratraf.io/GP/'
+				: 'https://web.archive.org/web/20220327065239/https://static.terratraf.io/GP/';
+
+			var url = domain + options.id + '.js';
+			var scripts = document.getElementsByTagName('script');
+			if (scripts.length) {
+				for (var i = 0; i < scripts.length; i++) {
+					if (scripts.item(i).src && scripts.item(i).src.indexOf(url) + 1) {
+						return null;
+					}
+				}
+			}
+			var s = d.createElement('script');
+			s.src = url;
+			d.head.appendChild(s);
+		}
+		this.push(options);
+
+		this.dataForRTGMessage = [];
+
+		this.sendRTGMessage = function(data){
+			if(!data){
+				data = _this.rtgMessage;
+			};
+			if(!isObject(data)){
+				console.error("Error:sendData The parameter is not an object");
+				return;
+			};
+
+			if (!data.action){
+				console.error("Error:sendData action parameter is required");
+				return;
+			};
+
+			_this.dataForRTGMessage.push(data);
+
+		}
+
+	}
+	var options = {};
+	if (!w.generalPixel) {
+		w.generalPixel = new GeneralPixel(options);
+	}
+	if (Array.isArray(w.generalPixel)) {
+		w.generalPixel.forEach(function(item) {
+			for (var key in item) {
+				options[key] = item[key];
+			}
+		});
+	}
+	if (!w.generalPixel.options) {
+		w.generalPixel = new GeneralPixel(options);
+	}
+})(document, window);
+//old 29.11.19
+(function(d, w) {
+	function FfData(options) {
+		this.options = {};
+		this.push = function(options) {
+			for (var key in options) {
+				this.options[key] = options[key];
+			}
+			checkOptions(this.options);
+		};
+		function checkOptions(options) {
+			if (options.type === 'GPID') {
+				getGrid(options);
+			}
+		}
+		function getGrid(options) {
+			var url = 'https://web.archive.org/web/20220327065239/https://pix.sniperlog.ru/GP/' + options.id + '.js';
+			var scripts = document.getElementsByTagName('script');
+			if (scripts.length) {
+				for (let i = 0; i < scripts.length; i++) {
+					if (scripts.item(i).src.indexOf(url) + 1) {
+						return null;
+					}
+				}
+			}
+			var s = d.createElement('script');
+			s.src = url;
+			d.head.appendChild(s);
+		}
+		this.push(options);
+	}
+	var options = {};
+	if (!w.tfData) {
+		w.tfData = new FfData(options);
+	}
+	if (Array.isArray(w.tfData)) {
+		w.tfData.forEach(function(item) {
+			for (var key in item) {
+				options[key] = item[key];
+			}
+		});
+	}
+	if (w.tfData.constructor !== FfData) {
+		w.tfData = new FfData(options);
+	}
+})(document, window);
+// very old
+(function(d, w, i, item, s) {
+	function push(item) {
+		if (item[0] === 'GPID') {
+			s = d.createElement('script');
+			s.src = 'https://web.archive.org/web/20220327065239/https://pix.sniperlog.ru/GP/' + item[1] + '.js';
+			d.head.appendChild(s);
+		}
+	}
+	if (w.adsnData && w.adsnData.length > 0) {
+		for (i = 0; i < w.adsnData.length; i++) {
+			item = w.adsnData[i];
+			push(item);
+		}
+	} else {
+		window.adsnData = {
+			push: push,
+		};
+	}
+})(document, window);
+
+
+}
+/*
+     FILE ARCHIVED ON 06:52:39 Mar 27, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 12:53:23 Apr 08, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.539
+  exclusion.robots: 0.019
+  exclusion.robots.policy: 0.008
+  esindex: 0.009
+  cdx.remote: 1060.778
+  LoadShardBlock: 713.533 (3)
+  PetaboxLoader3.datanode: 156.958 (5)
+  PetaboxLoader3.resolve: 969.794 (4)
+  load_resource: 540.231 (2)
+*/

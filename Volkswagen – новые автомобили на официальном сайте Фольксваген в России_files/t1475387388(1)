@@ -1,0 +1,162 @@
+
+
+
+
+
+//zp_dmp_sync.zp
+
+
+(function () {
+    if(true){
+    var d_i = document.createElement("img");
+    d_i.style.cssText="width:1px !important; height:1px !important; display:none !important;";
+    d_i.setAttribute("alt","");
+    d_i.setAttribute("src","https://web.archive.org/web/20220907133817/https://rtb.com.ru/prodmp-client-sync?noRedirect=true");
+    var s = document.body;
+    s.appendChild(d_i);}
+})();
+
+
+//Adspend
+
+(function() {
+	var ra = document.createElement('script');
+	ra.type = 'text/javascript';
+	ra.async = true;
+	ra.src = (('https:' == document.location.protocol ? 'https:' : 'http:')+'//web.archive.org/web/20220907133817/https://cdn.rtb.com.ru/visitTracking/visitTracking.min.js');
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(ra, s);
+})();
+
+
+
+
+
+
+
+//sync_li
+
+(function () {
+    if(true){
+    var d_i = document.createElement("img");
+    d_i.style.cssText="width:1px !important; height:1px !important; display:none !important;";
+    d_i.setAttribute("alt","");
+    d_i.setAttribute("src","//web.archive.org/web/20220907133817/https://counter.yadro.ru/id127/ddp-id.gif");
+    var s = document.body;
+    s.appendChild(d_i);}
+})();
+
+
+
+
+
+
+
+
+
+
+//zp_wv_all.zp
+
+
+
+
+//soloway
+
+
+(function (w, d, n, u, s) {
+w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
+var a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+a.async=true;a.src=u;m.parentNode.insertBefore(a,m)
+})(window, document, 'DSPCounter', '//web.archive.org/web/20220907133817/https://tags.soloway.ru/DSPCounter.js', 'script');
+
+DSPCounter('send', {
+  'sid'     : '222467',
+  'user_id' : ''
+});
+
+
+
+
+
+
+
+
+
+(function(){
+    var s   = document.createElement('script');
+    var x   = document.getElementsByTagName('script')[0];
+    s.type  = 'text/javascript';
+    s.async = true;
+    s.src   = ('https:'==document.location.protocol?'https://':'http://')
+            + 'eu-sonar.sociomantic.com/js/2010-07-01/adpan/volkswagen-ru';
+    x.parentNode.insertBefore( s, x );
+})();
+
+
+
+
+
+
+
+
+//zp_vv_all.zp
+
+
+
+
+(function (w, d, n, u, s) {
+w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
+var a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+a.async=true;a.src=u;m.parentNode.insertBefore(a,m)
+})(window, document, 'DSPCounter', '//web.archive.org/web/20220907133817/https://tags.soloway.ru/DSPCounter.js', 'script');
+
+DSPCounter('send', {
+  'sid'     : '216970',
+  'user_id' : ''
+});
+
+
+
+
+(function(w, d) {
+  var n = d.getElementsByTagName('script')[0],
+      s = d.createElement('script');
+
+  w.ADSPEND = {
+      onReady: function(f, a) {
+          var i = setInterval(function() {
+              if (this.r !== true) return;
+              clearInterval(i); try {
+                  this[f].apply(this, a);
+              } catch(e) {}
+          }.bind(this), 100);
+      }
+  };
+
+  s.addEventListener('load', function() {
+      w.ADSPEND.r = true;
+  });
+
+  s.async = true;
+  s.src = '//web.archive.org/web/20220907133817/https://cdn.rtb.com.ru/as-main.js';
+  n.parentNode.insertBefore(s, n);
+})(window, document);
+
+ADSPEND.onReady('retargeting', ['5f86d8a198657b40fa1aa082']);
+
+
+
+//soloway
+
+
+(function (w, d, n, u, s) {
+w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
+var a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+a.async=true;a.src=u;m.parentNode.insertBefore(a,m)
+})(window, document, 'DSPCounter', '//web.archive.org/web/20220907133817/https://tags.soloway.ru/DSPCounter.js', 'script');
+
+DSPCounter('send', {
+  'sid'     : '222467',
+  'user_id' : ''
+});
+

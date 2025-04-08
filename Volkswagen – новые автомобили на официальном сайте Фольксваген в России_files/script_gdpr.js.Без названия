@@ -1,0 +1,221 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+
+
+if (typeof $ !== 'undefined') {
+    function showIframe() {
+        $('iframe').show();
+        $('._block_alert').hide();
+    }
+
+function showStub() {
+var blockAlert = "<h2 class='_block_alert' style='display:inline-block; line-height:25px; text-align: center; background:#FFF; padding:10px; border-radius:5px; font-size:18px;'>Наша деятельность направлена на взаимодействие с пользователями на территории Российской Федерации.<br> В случае, если Вам недоступен полный функционал сайта, возможно, Вы используете иностранный IP-адрес.<br><br>The content of our website is primarily intended for users in Russian Federation.<br>If the website functionality is not fully available to you, maybe you are using a foreign IP address.</h2>";
+
+var exceptionsUrlIframe = [
+//
+];
+
+var exceptionsUrlFormAction = [
+'.vw_m601_search_input, .vw_js_m601_search_input_flyout'
+];
+
+$('iframe').each(function(k, v) {
+if (typeof $(this).attr('src') !== 'undefined') {
+var is_exceprion = false;
+var iframe = $(this);
+$.each(exceptionsUrlIframe, function(key,val) {
+if (iframe.attr('src').indexOf(val) > -1) {
+is_exceprion = true;
+}
+});
+if (!is_exceprion) {
+if ($(this).attr('src').indexOf('cars.volkswagen') > -1 || $(this).attr('src').indexOf('webgate.volkswagen') > -1 || $(this).attr('src').indexOf('vw-pkw-service.ru') > -1 || $(this).attr('src').indexOf('vw-nfz-service.ru') > -1) {
+$(this).hide();
+
+if ($(this).next('h2._block_alert').length > 0) {
+$(this).next('h2._block_alert').show();
+} else {
+$(this).after(blockAlert);
+}
+
+}
+}
+}
+});
+
+$('form').each(function(k, v) {
+var form = $(this);
+var is_exceprion = false;
+$.each(exceptionsUrlFormAction, function(key,val) {
+if (form.is(val)) {
+is_exceprion = true;
+}
+});
+if (!is_exceprion) {
+$(this).hide();
+
+if ($(this).next('h2._block_alert').length > 0) {
+$(this).next('h2._block_alert').show();
+} else {
+$(this).after(blockAlert);
+}
+
+}
+});
+
+}
+
+    function checkRussianLocation() {
+        if (isRussianLocation) {
+            showIframe();
+        }else{
+            //showStub();
+        }
+    }
+    if(typeof(getCookie) !== 'function') {
+        function getCookie(name) {
+            var matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+    }
+
+    var isRussianLocation = false;
+    var cookieIsRussianLocation = getCookie('isRussianLocation');
+
+    if (typeof cookieIsRussianLocation !== 'undefined') {
+        // Делаю не жесткую проверку, и не могу присвоить на прямую, так как if далее не проходит с 0 (строка)
+        if (cookieIsRussianLocation == 1) {
+            isRussianLocation = true;
+        }else{
+            isRussianLocation = false;
+        }
+        checkRussianLocation();
+    }else{
+        var isRussianObj = {};
+
+        /*function listener(event) {
+            var doamins = [
+                'https://web.archive.org/web/20220907133817/https://webgate.volkswagen.ru',
+                'https://web.archive.org/web/20220907133817/https://cars.volkswagen.ru',
+                'https://web.archive.org/web/20220907133817/https://cars.volkswagen-commercial.ru/'
+            ];
+
+            if ($.inArray(event.origin, doamins) === -1) {
+                console.log('error');
+                return;
+            }
+
+            if (typeof event.data.isRussianIp !== 'undefined') {
+                isRussianObj.ip = event.data.isRussianIp;
+            }
+            if (typeof event.data.isRussianLanguage !== 'undefined') {
+                isRussianObj.serverLanguage = event.data.isRussianLanguage;
+            }
+            checkState();
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener("message", listener);
+        } else {
+            // IE8
+            window.attachEvent("onmessage", listener);
+        }*/
+
+        function checkState() {
+            if (isRussianObj.ip || isRussianObj.location) {
+                isRussianLocation = true;
+            }
+            document.cookie = "isRussianLocation=" + (isRussianLocation ? 1 : 0);
+            checkRussianLocation();
+        }
+
+        isRussianObj.localLanguale = (navigator.language.toUpperCase() === 'RU-RU' || navigator.language.toUpperCase() === 'RU');
+        isRussianObj.ip = 0;
+        isRussianObj.serverLanguage = 0;
+        checkState();
+
+        function isRussian(lat, lng) {
+            $.ajax({
+                method: "GET",
+                url: "https://web.archive.org/web/20220907133817/https://geocode-maps.yandex.ru/1.x/",
+                data: { geocode: lng + ',' + lat, format: 'json' }
+                //data: { geocode: 111111111111111111111111, format: 'json' }
+            })
+                .done(function( msg ) {
+                    if (msg.response.GeoObjectCollection.featureMember[0]) {
+                        /*isRussianObj.location = 0;
+                        $.each(msg.response.GeoObjectCollection.featureMember, function(k, v) {
+                            if (v.GeoObject.metaDataProperty.GeocoderMetaData.Address.country_code.toUpperCase() == 'RU') {
+                                isRussianObj.location = 1;
+                            }
+                        });*/
+                        if (msg.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.country_code.toUpperCase() == 'RU') {
+                            isRussianObj.location = 1;
+                        }else{
+                            isRussianObj.location = 0;
+                        }
+                    }else{
+                        isRussianObj.location = 0;
+                    }
+                    checkState();
+                })
+                .fail(function(error) {
+                    isRussianObj.location = 0;
+                    checkState();
+                });
+        }
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            // Get the coordinates of the current possition.
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+
+            isRussian(lat,lng);
+
+        }, function(error) {
+            isRussianObj.location = 0;
+            checkState();
+        });
+    }
+
+    /*var isRussianIp = ;
+    var isRussianLanguage = ;
+    window.parent.postMessage({isRussianIp: isRussianIp, isRussianLanguage: isRussianLanguage},
+        "https://web.archive.org/web/20220907133817/https://www.volkswagen.ru");*/
+}
+
+
+}
+/*
+     FILE ARCHIVED ON 13:38:17 Sep 07, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 12:53:08 Apr 08, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.567
+  exclusion.robots: 0.025
+  exclusion.robots.policy: 0.015
+  esindex: 0.012
+  cdx.remote: 12.455
+  LoadShardBlock: 172.026 (3)
+  PetaboxLoader3.datanode: 210.066 (5)
+  load_resource: 740.628 (2)
+  PetaboxLoader3.resolve: 529.588 (2)
+*/

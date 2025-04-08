@@ -1,0 +1,45 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+Bootstrapper.bindDOMParsed(function(){var f=window.Bootstrapper,c="https://web.archive.org/web/20221221094208/https://sys.refocus.ru/ra.js",d={site_id:"1196465"},a="",b;for(b in d)""!==b&&""!==d[b]&&(a+=b+"\x3d"+d[b]+"\x26");a=a.slice(0,-1);f.insertScript(c+("?"+a))},3414029,638027,838);
+Bootstrapper.bindImmediate(function(){var f=window.Bootstrapper;window.versaTagQueue=function(){function c(b,d,c){if(b&&d&&c){switch(c){case e.ACTIVITY:b.clearActivityParam();break;case e.CONDITIONAL:b.clearConditionalParam();break;case e.RETARGET:b.clearRetargetParam();break;case e.DYNAMICRETARGET:b.clearDynamicRetargetParam()}for(var a in d)if(d.hasOwnProperty(a))switch(c){case e.ACTIVITY:b.setActivityParam(a,d[a]);break;case e.CONDITIONAL:b.setConditionalParam(a,d[a]);break;case e.RETARGET:b.setRetargetParam(a,
+d[a]);break;case e.DYNAMICRETARGET:b.setDynamicRetargetParam(a,d[a])}}}function d(g){if((!m||g)&&b){m=!0;g=a.shift();var k=window.versaTagObj;"undefined"===typeof g?m=!1:(c(k,g.activityParam,e.ACTIVITY),c(k,g.retargetParam,e.RETARGET),c(k,g.dynamicRetargetParam,e.DYNAMICRETARGET),c(k,g.conditionalParam,e.CONDITIONAL),k.generateRequest(),d(!0))}}var a=[],b=!1,m=!1,l=!1,e={ACTIVITY:1,CONDITIONAL:2,RETARGET:3,DYNAMICRETARGET:4},h={id:"3539",sync:"0",dispType:"js",ptcl:"HTTPS",bsUrl:"bs.serving-sys.com/BurstingPipe"};
+a.push=function(){if(!l){var a=arguments[0],c=window.versaTag=a.basicConfig?a.basicConfig:h;c.activityParams=a.activityParam||{};c.retargetParams=a.retargetParam||{};c.dynamicRetargetParams=a.dynamicRetargetParam||{};c.conditionalParams=a.conditionalParam||{};f.loadScriptCallback("//"+("https:"==document.location.protocol?"secure-":"")+"ds.serving-sys.com/SemiCachedScripts/ebOneTag.js",function(){b=!0;d()});l=!0;return 0}a=Array.prototype.push.apply(this,arguments);setTimeout(d(),1);return a};return{push:function(b){b&&
+a.push(b)}}}()},3171885,616305,24);Bootstrapper.bindImmediate(function(){var f=window.Bootstrapper,c="//web.archive.org/web/20221221094208/https://webgate.volkswagen.ru/scripts.js",d={},a="",b;for(b in d)""!==b&&""!==d[b]&&(a+=b+"\x3d"+d[b]+"\x26");a=a.slice(0,-1);f.insertScript(c+("?"+a))},3413967,638002,838);
+Bootstrapper.bindImmediate(function(){(function(f,c,d){(f[d]=f[d]||[]).push(function(){var a={project:3117791};try{f.t3117791=new top100(a)}catch(l){}});var a=c.getElementsByTagName("script")[0],b=c.createElement("script");d=function(){a.parentNode.insertBefore(b,a)};b.type="text/javascript";b.async=!0;b.src=("https:"==c.location.protocol?"https:":"http:")+"//web.archive.org/web/20221221094208/https://st.top100.ru/top100/top100.js";"[object Opera]"==f.opera?c.addEventListener("DOMContentLoaded",d,!1):d()})(window,document,"_top100q")},3221689,
+640248,24);Bootstrapper.bindDependencyImmediate(function(){var f={basicConfig:{id:"3539",sync:"0",dispType:"js",ptcl:"HTTPS",bsUrl:"bs.serving-sys.com/BurstingPipe"},activityParam:{Versatag:"Yes"},retargetParam:{},dynamicRetargetParam:{},conditionalParam:{event:"Site-Visit_Session",Country:window.Bootstrapper.data.resolve("Manage.environment.country"),Versatag:"Yes"}};window.versaTagQueue&&window.versaTagQueue.push(f)},3524093,[3171885],616352,[616305],24);
+Bootstrapper.bindImmediate(function(){var f=window.Bootstrapper;(function(c,d,a,b,f){c[b]=c[b]||[];c[b].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});c=d.getElementsByTagName(a)[0];d=d.createElement(a);d.async=!0;d.src="https://web.archive.org/web/20221221094208/https://www.googletagmanager.com/gtm.js?id\x3d"+f+("dataLayer"!=b?"\x26l\x3d"+b:"");c.parentNode.insertBefore(d,c)})(window,document,"script","dataLayer_kdx","GTM-K75CBSC");!function(c,d,a,b,f,l,e,h,g){c.rstat||(e=c.rstat=function(){var a=Array.prototype.slice.call(arguments);
+a.length&&a[0]===b&&e._a(Object(a[1]));return e.doCall?e.doCall.call(e,a):e._q.push(a)&&0},e.push=e,e._sv="3.17.0",e._q=[],e._jsl=function(b){h=d.createElement(a);h.async=!0;h.src=b;g=d.getElementsByTagName(a)[0];g.parentNode.insertBefore(h,g)},e._a=function(a){e._host=a.server;e._prefix=a.pathPrefix||"";e._host&&e._jsl(f+e._host+e._prefix+l)})}(window,document,"script","configure","https://","/lib.js");rstat("configure",{server:"rstat.kodix.ru"});rstat("onReady",function(){var c={segment:"vw_global"};
+visitor.getMarketingCloudVisitorID()&&(c.adb_id=visitor.getMarketingCloudVisitorID().toString());rstat("identify",c);rstat("page")});(window.yandex_metrika_callbacks=window.yandex_metrika_callbacks||[]).push(function(){try{var c={};c={id:"32109441",clickmap:!0,trackLinks:!0,accurateTrackBounce:!0,webvisor:!0,trackHash:!0};window.yaCounter32109441=new Ya.Metrika(c)}catch(d){}});f.insertScript("//web.archive.org/web/20221221094208/https://mc.yandex.ru/metrika/watch.js")},3609321,637991,989);
+Bootstrapper.bindImmediate(function(){var f=window.Bootstrapper,c="//web.archive.org/web/20221221094208/https://webgate.volkswagen.ru/api/scripts/script_gdpr.js",d={},a="",b;for(b in d)""!==b&&""!==d[b]&&(a+=b+"\x3d"+d[b]+"\x26");a=a.slice(0,-1);f.insertScript(c+("?"+a))},3414020,643819,838);
+
+}
+/*
+     FILE ARCHIVED ON 09:42:08 Dec 21, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 12:53:06 Apr 08, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.747
+  exclusion.robots: 0.025
+  exclusion.robots.policy: 0.011
+  esindex: 0.013
+  cdx.remote: 40.754
+  LoadShardBlock: 335.722 (3)
+  PetaboxLoader3.datanode: 113.659 (4)
+  PetaboxLoader3.resolve: 201.62 (2)
+  load_resource: 120.299
+*/
