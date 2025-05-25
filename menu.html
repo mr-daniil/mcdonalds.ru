@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Меню | McDonald's Россия</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Меню McDonald's</h1>
+    <nav>
+      <a href="index.html">Главная</a> |
+      <a href="order.html">Заказ</a> |
+      <a href="cart.html">Корзина</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Категории</h2>
+    <ul>
+      <li><a href="#burgers">Бургеры</a></li>
+      <li><a href="#snacks">Закуски</a></li>
+      <li><a href="#drinks">Напитки</a></li>
+      <li><a href="#desserts">Десерты</a></li>
+    </ul>
+
+    <section id="burgers">
+      <h3>Бургеры</h3>
+      <div class="menu-item">
+        <img src="https://mcdonalds.az/wp-content/uploads/2023/01/Bigmac.png" alt="Биг Мак" width="200">
+        <h4>Биг Мак</h4>
+        <p>Классический бургер с двумя котлетами и специальным соусом.</p>
+        <p><strong>Цена: 350 ₽</strong></p>
+        <button onclick="addToCart('Биг Мак', 350)">Добавить в корзину</button>
+      </div>
+    </section>
+
+    <section id="snacks">
+      <h3>Закуски</h3>
+      <div class="menu-item">
+        <img src="https://mcdonalds.az/wp-content/uploads/2023/01/Fries.png" alt="Картофель фри" width="200">
+        <h4>Картофель фри</h4>
+        <p>Хрустящий картофель фри среднего размера.</p>
+        <p><strong>Цена: 150 ₽</strong></p>
+        <button onclick="addToCart('Картофель фри', 150)">Добавить в корзину</button>
+      </div>
+    </section>
+
+    <section id="drinks">
+      <h3>Напитки</h3>
+      <div class="menu-item">
+        <img src="https://mcdonalds.az/wp-content/uploads/2023/01/CocaCola.png" alt="Coca-Cola" width="200">
+        <h4>Coca-Cola</h4>
+        <p>Освежающий напиток Coca-Cola 0.5 л.</p>
+        <p><strong>Цена: 120 ₽</strong></p>
+        <button onclick="addToCart('Coca-Cola', 120)">Добавить в корзину</button>
+      </div>
+    </section>
+
+    <section id="desserts">
+      <h3>Десерты</h3>
+      <div class="menu-item">
+        <img src="https://mcdonalds.az/wp-content/uploads/2023/01/Sundae.png" alt="Сандей" width="200">
+        <h4>Сандей</h4>
+        <p>Мороженое с шоколадным топпингом.</p>
+        <p><strong>Цена: 180 ₽</strong></p>
+        <button onclick="addToCart('Сандей', 180)">Добавить в корзину</button>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

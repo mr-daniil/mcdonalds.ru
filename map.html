@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Заведения | McDonald's Россия</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+  <script>
+    ymaps.ready(init);
+    function init() {
+      var map = new ymaps.Map("map", {
+        center: [55.751574, 37.573856],
+        zoom: 10
+      });
+      var placemark = new ymaps.Placemark([55.751574, 37.573856], {
+        hintContent: 'McDonald's Москва',
+        balloonContent: 'McDonald's на Тверской'
+      });
+      map.geoObjects.add(placemark);
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Карта заведений</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+    </nav>
+  </header>
+  <main>
+    <div id="map" style="width: 100%; height: 400px;"></div>
+  </main>
+</body>
+</html>

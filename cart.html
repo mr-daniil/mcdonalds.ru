@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Корзина | McDonald's Россия</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const container = document.getElementById('cart-container');
+      container.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        container.innerHTML += `<p>${item.name} - ${item.price} ₽</p>`;
+        total += item.price;
+      });
+      container.innerHTML += `<hr><p>Итого: ${total} ₽</p>`;
+    }
+    window.onload = loadCart;
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Ваша корзина</h1>
+    <nav>
+      <a href="index.html">Главная</a> |
+      <a href="menu.html">Меню</a> |
+      <a href="order.html">Заказ</a>
+    </nav>
+  </header>
+  <main>
+    <div id="cart-container"></div>
+  </main>
+</body>
+</html>

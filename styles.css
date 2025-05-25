@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background-color: #da291c;
+  color: white;
+  padding: 20px;
+}
+.logo {
+  font-size: 24px;
+}
+.nav {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+.nav a {
+  color: white;
+  text-decoration: none;
+}
+.hero {
+  padding: 50px;
+  background-color: #ffcc00;
+  text-align: center;
+}
+footer {
+  background-color: #da291c;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
