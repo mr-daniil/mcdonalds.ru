@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Макдоналдс - Официальный сайт в России | Закажите онлайн</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        :root {
+            --primary: #FFC72C;
+            --secondary: #DA291C;
+            --dark: #27251F;
+            --light: #FFFFFF;
+            --gray: #F5F5F5;
+            --success: #4CAF50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-top-links a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: opacity 0.3s;
+        }
+        
+        .header-top-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo-text {
+            margin-left: 10px;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            background-color: #ffb400;
+        }
+        
+        .btn-outline {
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            background: none;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: var(--light);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: var(--light);
+        }
+        
+        .btn-success:hover {
+            background-color: #3d8b40;
+        }
+        
+        /* Hero */
+        .hero {
+            background-color: var(--primary);
+            padding: 60px 0;
+            text-align: center;
+            background-image: url('https://www.mcdonalds.com/content/dam/sites/usa/nfl/publication/1pub_Desktop_HomeHero_1260x560_V1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Products */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            color: var(--secondary);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .product-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--secondary);
+        }
+        
+        /* Promo */
+        .promo {
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .promo h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .promo p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+        
+        /* Restaurants */
+        .restaurants {
+            background-color: var(--gray);
+        }
+        
+        .restaurants-map {
+            height: 400px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .restaurants-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .restaurant-card {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .restaurant-card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .restaurant-card p {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .cart-items {
+            margin: 20px 0;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: none;
+            cursor: pointer;
+        }
+        
+        .cart-total {
+            font-weight: bold;
+            font-size: 20px;
+            text-align: right;
+            margin: 20px 0;
+        }
+        
+        /* Checkout Form */
+        .checkout-form {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        /* Restaurant selection */
+        .restaurant-selection {
+            margin-bottom: 15px;
+        }
+        
+        .restaurant-selection label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .restaurant-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .restaurant-option {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .restaurant-option input {
+            margin-right: 10px;
+        }
+        
+        /* Account */
+        .account-section {
+            display: none;
+            padding: 40px 0;
+        }
+        
+        .account-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .account-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .account-tab.active {
+            border-bottom: 2px solid var(--secondary);
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .account-content {
+            display: none;
+        }
+        
+        .account-content.active {
+            display: block;
+        }
+        
+        .order-history {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .order-history th, 
+        .order-history td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .order-history th {
+            background-color: var(--gray);
+        }
+        
+        /* Menu categories */
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .menu-category {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .menu-category.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        @media (max-width: 992px) {
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .header-top-links a {
+                margin: 0 10px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div>Добро пожаловать в Макдоналдс!</div>
+                <div class="header-top-links">
+                    <a href="#" onclick="showRestaurants()">Найти ресторан</a>
+                    <a href="#" onclick="showDelivery()">МакДоставка</a>
+                    <a href="#">Акции</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/McDonald%27s_Golden_Arches.svg/1200px-McDonald%27s_Golden_Arches.svg.png" alt="McDonald's">
+                    <span class="logo-text">Макдоналдс</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="showMenu()">Меню</a></li>
+                        <li><a href="#">Акции</a></li>
+                        <li><a href="#" onclick="showDelivery()">МакДоставка</a></li>
+                        <li><a href="#" onclick="showAccount()">Мой аккаунт</a></li>
+                        <li><a href="#" onclick="showRestaurants()">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button class="cart-btn" onclick="showCart()">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </button>
+                    <button class="btn btn-outline" onclick="showAccount()">Войти</button>
+                    <button class="mobile-menu-btn">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Мы возвращаемся в Россию!</h1>
+            <p>Легендарный вкус, который вы любите, снова с вами. Заказывайте онлайн с доставкой или самовывозом.</p>
+            <button class="btn btn-primary" onclick="showMenu()">Заказать сейчас</button>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section" id="menu-section">
+        <div class="container">
+            <h2 class="section-title">Наше меню</h2>
+            
+            <div class="menu-categories">
+                <div class="menu-category active" onclick="filterMenu('all')">Все меню</div>
+                <div class="menu-category" onclick="filterMenu('burgers')">Бургеры</div>
+                <div class="menu-category" onclick="filterMenu('chicken')">Курица</div>
+                <div class="menu-category" onclick="filterMenu('snacks')">Закуски</div>
+                <div class="menu-category" onclick="filterMenu('drinks')">Напитки</div>
+                <div class="menu-category" onclick="filterMenu('desserts')">Десерты</div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Бургеры -->
+                <div class="product-card" data-category="burgers">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/big-mak.png" alt="Биг Мак">
+                        <div class="product-badge">Хит</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Биг Мак</h3>
+                        <p class="product-desc">Легендарный вкус: две говяжьи котлеты, сыр, салат, лук, корнишоны и фирменный соус "Биг Мак".</p>
+                        <div class="product-footer">
+                            <div class="product-price">199 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Биг Мак', 199, 'https://mcdonalds.az/wp-content/uploads/2022/04/big-mak.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="burgers">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/dvoynoy-chizburger.png" alt="Двойной Чизбургер">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Двойной Чизбургер</h3>
+                        <p class="product-desc">Две говяжьи котлеты, два кусочка сыра Чеддер, горчица, кетчуп, лук и маринованные огурчики на булочке с кунжутом.</p>
+                        <div class="product-footer">
+                            <div class="product-price">109 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Двойной Чизбургер', 109, 'https://mcdonalds.az/wp-content/uploads/2022/04/dvoynoy-chizburger.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="burgers">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/chizburger.png" alt="Чизбургер">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Чизбургер</h3>
+                        <p class="product-desc">Пряный горчичный соус, кетчуп, сочные огурчики, лук, плавленый сыр "Чеддер", пшеничная булочка с кунжутом.</p>
+                        <div class="product-footer">
+                            <div class="product-price">59 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Чизбургер', 59, 'https://mcdonalds.az/wp-content/uploads/2022/04/chizburger.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="burgers">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/gamburger.png" alt="Гамбургер">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Гамбургер</h3>
+                        <p class="product-desc">Классическая котлета из 100% говядины с луком, горчицей и кетчупом на пшеничной булочке с кунжутом.</p>
+                        <div class="product-footer">
+                            <div class="product-price">49 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Гамбургер', 49, 'https://mcdonalds.az/wp-content/uploads/2022/04/gamburger.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="burgers">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/big-teysti.png" alt="Биг Тейсти">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Биг Тейсти</h3>
+                        <p class="product-desc">Большая котлета из сочной говядины, три ломтика сыра, хрустящий салат, спелые помидоры и соус "Биг Тейсти".</p>
+                        <div class="product-footer">
+                            <div class="product-price">249 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Биг Тейсти', 249, 'https://mcdonalds.az/wp-content/uploads/2022/04/big-teysti.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Курица -->
+                <div class="product-card" data-category="chicken">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/chikenburger.png" alt="Чикенбургер">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Чикенбургер</h3>
+                        <p class="product-desc">Нежная куриная котлета, свежий салат и нежный майонез на пшеничной булочке с кунжутом.</p>
+                        <div class="product-footer">
+                            <div class="product-price">79 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Чикенбургер', 79, 'https://mcdonalds.az/wp-content/uploads/2022/04/chikenburger.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="chicken">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/naggetsy-6-sht.png" alt="Наггетсы 6 шт">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Наггетсы 6 шт</h3>
+                        <p class="product-desc">Хрустящие куриные наггетсы с нежной куриной грудкой внутри. Подаются с соусом на выбор.</p>
+                        <div class="product-footer">
+                            <div class="product-price">129 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Наггетсы 6 шт', 129, 'https://mcdonalds.az/wp-content/uploads/2022/04/naggetsy-6-sht.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="chicken">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/stripsy-2-sht.png" alt="Стрипсы 2 шт">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Стрипсы 2 шт</h3>
+                        <p class="product-desc">Длинные кусочки нежной куриной грудки в хрустящей панировке. Подаются с соусом на выбор.</p>
+                        <div class="product-footer">
+                            <div class="product-price">119 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Стрипсы 2 шт', 119, 'https://mcdonalds.az/wp-content/uploads/2022/04/stripsy-2-sht.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Закуски -->
+                <div class="product-card" data-category="snacks">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/kartofel-fri-sredniy.png" alt="Картофель Фри">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Картофель Фри</h3>
+                        <p class="product-desc">Знаменитые золотистые и хрустящие ломтики отборного картофеля, пожаренные в растительном фритюре.</p>
+                        <div class="product-footer">
+                            <div class="product-price">89 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Картофель Фри', 89, 'https://mcdonalds.az/wp-content/uploads/2022/04/kartofel-fri-sredniy.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="snacks">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/kartofel-po-derevenski.png" alt="Картофель по-деревенски">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Картофель по-деревенски</h3>
+                        <p class="product-desc">Ароматные кусочки картофеля с кожурой, запеченные с травами и специями.</p>
+                        <div class="product-footer">
+                            <div class="product-price">99 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Картофель по-деревенски', 99, 'https://mcdonalds.az/wp-content/uploads/2022/04/kartofel-po-derevenski.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="snacks">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/salat-tsezar.png" alt="Салат Цезарь">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Салат Цезарь</h3>
+                        <p class="product-desc">Свежий салат айсберг, куриные стрипсы, помидоры черри, сыр пармезан и соус Цезарь.</p>
+                        <div class="product-footer">
+                            <div class="product-price">179 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Салат Цезарь', 179, 'https://mcdonalds.az/wp-content/uploads/2022/04/salat-tsezar.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Напитки -->
+                <div class="product-card" data-category="drinks">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/koka-kola-0-25.png" alt="Кока-Кола">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Кока-Кола</h3>
+                        <p class="product-desc">Освежающий газированный напиток с классическим вкусом Coca-Cola.</p>
+                        <div class="product-footer">
+                            <div class="product-price">79 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Кока-Кола', 79, 'https://mcdonalds.az/wp-content/uploads/2022/04/koka-kola-0-25.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="drinks">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/ays-tea.png" alt="Айс Теа">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Айс Теа</h3>
+                        <p class="product-desc">Освежающий холодный чай с лимонным вкусом.</p>
+                        <div class="product-footer">
+                            <div class="product-price">89 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Айс Теа', 89, 'https://mcdonalds.az/wp-content/uploads/2022/04/ays-tea.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="drinks">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/molochnyy-kokteyl-vanil.png" alt="Молочный коктейль Ваниль">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Молочный коктейль Ваниль</h3>
+                        <p class="product-desc">Нежный молочный коктейль с ванильным вкусом.</p>
+                        <div class="product-footer">
+                            <div class="product-price">149 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Молочный коктейль Ваниль', 149, 'https://mcdonalds.az/wp-content/uploads/2022/04/molochnyy-kokteyl-vanil.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Десерты -->
+                <div class="product-card" data-category="desserts">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/makflurri-oreo.png" alt="МакФлурри Орео">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">МакФлурри Орео</h3>
+                        <p class="product-desc">Нежное ванильное мороженое с кусочками печенья Oreo® и шоколадным соусом. Подается в стаканчике с ложечкой.</p>
+                        <div class="product-footer">
+                            <div class="product-price">129 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('МакФлурри Орео', 129, 'https://mcdonalds.az/wp-content/uploads/2022/04/makflurri-oreo.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="desserts">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/yablochnyy-pirozhok.png" alt="Яблочный пирожок">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Яблочный пирожок</h3>
+                        <p class="product-desc">Хрустящий пирожок с начинкой из яблок и корицы.</p>
+                        <div class="product-footer">
+                            <div class="product-price">59 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Яблочный пирожок', 59, 'https://mcdonalds.az/wp-content/uploads/2022/04/yablochnyy-pirozhok.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="desserts">
+                    <div class="product-image">
+                        <img src="https://mcdonalds.az/wp-content/uploads/2022/04/maffin-s-chernikoy.png" alt="Маффин с черникой">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Маффин с черникой</h3>
+                        <p class="product-desc">Нежный бисквитный маффин с черникой и сахарной крошкой.</p>
+                        <div class="product-footer">
+                            <div class="product-price">89 ₽</div>
+                            <button class="btn btn-primary" onclick="addToCart('Маффин с черникой', 89, 'https://mcdonalds.az/wp-content/uploads/2022/04/maffin-s-chernikoy.png')">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Section -->
+    <section class="section" id="delivery-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">МакДоставка</h2>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <p>Закажите любимые блюда с доставкой на дом или в офис</p>
+                <button class="btn btn-primary" onclick="showMenu()">Выбрать блюда</button>
+            </div>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+                <div style="text-align: center; max-width: 300px;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">🚴</div>
+                    <h3>Быстрая доставка</h3>
+                    <p>Среднее время доставки - 30 минут</p>
+                </div>
+                <div style="text-align: center; max-width: 300px;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">💳</div>
+                    <h3>Удобная оплата</h3>
+                    <p>Наличными или картой при получении</p>
+                </div>
+                <div style="text-align: center; max-width: 300px;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">🎁</div>
+                    <h3>Бонусы</h3>
+                    <p>Копьте баллы за каждую покупку</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurants Section -->
+    <section class="section restaurants" id="restaurants-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Наши рестораны</h2>
+            <div class="restaurants-map">
+                <div id="map"></div>
+            </div>
+            <div class="restaurants-list">
+                <!-- Restaurant 1 -->
+                <div class="restaurant-card">
+                    <h3>Макдоналдс на Тверской</h3>
+                    <p>ул. Тверская, 10</p>
+                    <p>Ежедневно: 08:00 - 23:00</p>
+                    <p>Телефон: +7 (495) 123-45-67</p>
+                    <button class="btn btn-primary" style="margin-top: 10px;" onclick="selectRestaurant('Макдоналдс на Тверской')">Выбрать</button>
+                </div>
+                
+                <!-- Restaurant 2 -->
+                <div class="restaurant-card">
+                    <h3>Макдоналдс на Арбате</h3>
+                    <p>ул. Арбат, 25</p>
+                    <p>Ежедневно: 08:00 - 23:00</p>
+                    <p>Телефон: +7 (495) 765-43-21</p>
+                    <button class="btn btn-primary" style="margin-top: 10px;" onclick="selectRestaurant('Макдоналдс на Арбате')">Выбрать</button>
+                </div>
+                
+                <!-- Restaurant 3 -->
+                <div class="restaurant-card">
+                    <h3>Макдоналдс в Москва-Сити</h3>
+                    <p>Пресненская наб., 8</p>
+                    <p>Ежедневно: 09:00 - 22:00</p>
+                    <p>Телефон: +7 (495) 987-65-43</p>
+                    <button class="btn btn-primary" style="margin-top: 10px;" onclick="selectRestaurant('Макдоналдс в Москва-Сити')">Выбрать</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Account Section -->
+    <section class="section" id="account-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Мой аккаунт</h2>
+            
+            <div class="account-tabs">
+                <div class="account-tab active" onclick="openTab('profile')">Профиль</div>
+                <div class="account-tab" onclick="openTab('orders')">Мои заказы</div>
+                <div class="account-tab" onclick="openTab('addresses')">Адреса доставки</div>
+            </div>
+            
+            <div id="profile" class="account-content active">
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" id="user-name" value="Иван Иванов">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="user-email" value="ivan@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" id="user-phone" value="+7 (123) 456-78-90">
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 20px;">Сохранить изменения</button>
+                </div>
+            </div>
+            
+            <div id="orders" class="account-content">
+                <h3 style="margin-bottom: 20px;">История заказов</h3>
+                <table class="order-history">
+                    <thead>
+                        <tr>
+                            <th>Номер</th>
+                            <th>Дата</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#12345</td>
+                            <td>15.05.2023</td>
+                            <td>587 ₽</td>
+                            <td>Доставлен</td>
+                        </tr>
+                        <tr>
+                            <td>#12344</td>
+                            <td>10.05.2023</td>
+                            <td>325 ₽</td>
+                            <td>Доставлен</td>
+                        </tr>
+                        <tr>
+                            <td>#12340</td>
+                            <td>05.05.2023</td>
+                            <td>742 ₽</td>
+                            <td>Отменен</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="addresses" class="account-content">
+                <h3 style="margin-bottom: 20px;">Мои адреса</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                    <div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px; width: 300px;">
+                        <h4>Домашний адрес</h4>
+                        <p>ул. Пушкина, д. 10, кв. 25</p>
+                        <button class="btn btn-outline" style="margin-top: 10px;">Изменить</button>
+                    </div>
+                    <div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px; width: 300px;">
+                        <h4>Рабочий адрес</h4>
+                        <p>ул. Ленина, д. 42, офис 305</p>
+                        <button class="btn btn-outline" style="margin-top: 10px;">Изменить</button>
+                    </div>
+                    <div style="border: 1px dashed #ddd; padding: 15px; border-radius: 5px; width: 300px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                        <span>+ Добавить новый адрес</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1 -->
+                <div class="footer-column">
+                    <h3>Меню</h3>
+                    <ul>
+                        <li><a href="#" onclick="showMenu()">Бургеры</a></li>
+                        <li><a href="#" onclick="showMenu()">Курица</a></li>
+                        <li><a href="#" onclick="showMenu()">Снэки</a></li>
+                        <li><a href="#" onclick="showMenu()">Напитки</a></li>
+                        <li><a href="#" onclick="showMenu()">Десерты</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="footer-column">
+                    <h3>О компании</h3>
+                    <ul>
+                        <li><a href="#">История</a></li>
+                        <li><a href="#">Качество</a></li>
+                        <li><a href="#">Карьера</a></li>
+                        <li><a href="#">Новости</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="#" onclick="showRestaurants()">Рестораны</a></li>
+                        <li><a href="#">Обратная связь</a></li>
+                        <li><a href="#">Для прессы</a></li>
+                        <li><a href="#">Франчайзинг</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div class="footer-column">
+                    <h3>Подписаться</h3>
+                    <p>Будьте в курсе новостей и акций:</p>
+                    <div class="social-links">
+                        <a href="#">📱</a>
+                        <a href="#">📘</a>
+                        <a href="#">📸</a>
+                        <a href="#">🎵</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Макдоналдс. Все права защищены.</p>
+                <p><a href="#">Политика конфиденциальности</a> | <a href="#">Условия использования</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="hideCart()">×</button>
+            <h2>Ваша корзина</h2>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+                <p style="text-align: center; padding: 20px;">Ваша корзина пуста</p>
+            </div>
+            <div class="cart-total" id="cart-total">Итого: 0 ₽</div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="showCheckoutForm()">Оформить заказ</button>
+            
+            <!-- Checkout Form -->
+            <div class="checkout-form" id="checkout-form">
+                <h3 style="margin: 20px 0 10px;">Оформление заказа</h3>
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input type="text" id="checkout-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Телефон</label>
+                    <input type="tel" id="checkout-phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Способ получения</label>
+                    <select id="delivery-method" onchange="toggleDeliveryAddress()">
+                        <option value="pickup">Самовывоз</option>
+                        <option value="delivery">Доставка</option>
+                    </select>
+                </div>
+                
+                <!-- Restaurant selection for pickup -->
+                <div class="form-group restaurant-selection" id="restaurant-selection">
+                    <label>Выберите ресторан для самовывоза</label>
+                    <div class="restaurant-options">
+                        <label class="restaurant-option">
+                            <input type="radio" name="restaurant" value="Макдоналдс на Тверской" checked> 
+                            Макдоналдс на Тверской (ул. Тверская, 10)
+                        </label>
+                        <label class="restaurant-option">
+                            <input type="radio" name="restaurant" value="Макдоналдс на Арбате"> 
+                            Макдоналдс на Арбате (ул. Арбат, 25)
+                        </label>
+                        <label class="restaurant-option">
+                            <input type="radio" name="restaurant" value="Макдоналдс в Москва-Сити"> 
+                            Макдоналдс в Москва-Сити (Пресненская наб., 8)
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="delivery-address-group" style="display: none;">
+                    <label>Адрес доставки</label>
+                    <input type="text" id="delivery-address">
+                </div>
+                <div class="form-group">
+                    <label>Комментарий к заказу</label>
+                    <textarea id="order-comment" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Способ оплаты</label>
+                    <select id="payment-method">
+                        <option value="cash">Наличными при получении</option>
+                        <option value="card">Картой онлайн</option>
+                    </select>
+                </div>
+                <button class="btn btn-success" style="width: 100%; margin-top: 20px;" onclick="placeOrder()">Подтвердить заказ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div class="modal" id="order-success-modal" style="display: none;">
+        <div class="modal-content" style="text-align: center;">
+            <h2>Спасибо за заказ!</h2>
+            <p style="font-size: 60px; margin: 20px 0;">🎉</p>
+            <p>Ваш заказ #<span id="order-number">12345</span> успешно оформлен.</p>
+            <p id="order-details">Самовывоз из ресторана "Макдоналдс на Тверской"</p>
+            <p>Сумма: <span id="order-total">0 ₽</span></p>
+            <button class="btn btn-primary" style="margin-top: 20px;" onclick="hideOrderSuccess()">Отлично!</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Global variables
+        let cart = [];
+        let selectedRestaurant = "Макдоналдс на Тверской";
+        
+        // Initialize map
+        function initMap() {
+            const map = L.map('map').setView([55.7558, 37.6173], 12);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Add markers for restaurants
+            const restaurants = [
+                {name: "Макдоналдс на Тверской", lat: 55.7627, lng: 37.6056},
+                {name: "Макдоналдс на Арбате", lat: 55.7493, lng: 37.5946},
+                {name: "Макдоналдс в Москва-Сити", lat: 55.7486, lng: 37.5396}
+            ];
+            
+            restaurants.forEach(restaurant => {
+                const marker = L.marker([restaurant.lat, restaurant.lng]).addTo(map)
+                    .bindPopup(restaurant.name);
+                
+                marker.on('click', function() {
+                    selectRestaurant(restaurant.name);
+                });
+            });
+        }
+        
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            updateCartCount();
+        });
+        
+        // Cart functions
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    image: image
+                });
+            }
+            
+            updateCartCount();
+            showCart();
+            updateCartItems();
+        }
+        
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = count;
+        }
+        
+        function updateCartItems() {
+            const cartItemsEl = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = '<p style="text-align: center; padding: 20px;">Ваша корзина пуста</p>';
+                cartTotalEl.textContent = 'Итого: 0 ₽';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+                            <div>
+                                <div style="font-weight: 500;">${item.name}</div>
+                                <div>${item.price} ₽</div>
+                            </div>
+                        </div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" onclick="changeQuantity(${index}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="changeQuantity(${index}, 1)">+</button>
+                            <button style="margin-left: 15px; background: none; border: none; color: #999; cursor: pointer;" onclick="removeFromCart(${index})">✕</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItemsEl.innerHTML = html;
+            cartTotalEl.textContent = `Итого: ${total} ₽`;
+        }
+        
+        function changeQuantity(index, change) {
+            const item = cart[index];
+            item.quantity += change;
+            
+            if (item.quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            
+            updateCartCount();
+            updateCartItems();
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            updateCartItems();
+        }
+        
+        // Modal functions
+        function showCart() {
+            document.getElementById('cart-modal').style.display = 'flex';
+            document.getElementById('checkout-form').style.display = 'none';
+            updateCartItems();
+        }
+        
+        function hideCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+        
+        function showCheckoutForm() {
+            if (cart.length === 0) {
+                alert('Ваша корзина пуста');
+                return;
+            }
+            
+            document.getElementById('checkout-form').style.display = 'block';
+            document.querySelector('.cart-items').style.marginBottom = '10px';
+            
+            // Scroll to form
+            document.querySelector('.modal-content').scrollTop = document.querySelector('.modal-content').scrollHeight;
+        }
+        
+        function toggleDeliveryAddress() {
+            const method = document.getElementById('delivery-method').value;
+            const addressGroup = document.getElementById('delivery-address-group');
+            const restaurantSelection = document.getElementById('restaurant-selection');
+            
+            if (method === 'delivery') {
+                addressGroup.style.display = 'block';
+                restaurantSelection.style.display = 'none';
+            } else {
+                addressGroup.style.display = 'none';
+                restaurantSelection.style.display = 'block';
+            }
+        }
+        
+        function placeOrder() {
+            const name = document.getElementById('checkout-name').value;
+            const phone = document.getElementById('checkout-phone').value;
+            const method = document.getElementById('delivery-method').value;
+            
+            let address;
+            if (method === 'delivery') {
+                address = document.getElementById('delivery-address').value;
+                if (!address) {
+                    alert('Пожалуйста, укажите адрес доставки');
+                    return;
+                }
+            } else {
+                const selected = document.querySelector('input[name="restaurant"]:checked');
+                address = selected ? selected.value : 'Не выбран';
+            }
+            
+            const comment = document.getElementById('order-comment').value;
+            const payment = document.getElementById('payment-method').value;
+            
+            if (!name || !phone) {
+                alert('Пожалуйста, заполните обязательные поля');
+                return;
+            }
+            
+            // Generate random order number
+            const orderNumber = Math.floor(10000 + Math.random() * 90000);
+            
+            // Show success modal
+            document.getElementById('cart-modal').style.display = 'none';
+            document.getElementById('order-number').textContent = orderNumber;
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('order-total').textContent = `${total} ₽`;
+            
+            if (method === 'pickup') {
+                document.getElementById('order-details').textContent = `Самовывоз из ресторана "${address}"`;
+            } else {
+                document.getElementById('order-details').textContent = `Доставка по адресу: ${address}`;
+            }
+            
+            document.getElementById('order-success-modal').style.display = 'flex';
+            
+            // Clear cart
+            cart = [];
+            updateCartCount();
+        }
+        
+        function hideOrderSuccess() {
+            document.getElementById('order-success-modal').style.display = 'none';
+        }
+        
+        // Navigation functions
+        function showMenu() {
+            hideAllSections();
+            document.getElementById('menu-section').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function showDelivery() {
+            hideAllSections();
+            document.getElementById('delivery-section').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function showRestaurants() {
+            hideAllSections();
+            document.getElementById('restaurants-section').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function showAccount() {
+            hideAllSections();
+            document.getElementById('account-section').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function hideAllSections() {
+            document.getElementById('menu-section').style.display = 'none';
+            document.getElementById('delivery-section').style.display = 'none';
+            document.getElementById('restaurants-section').style.display = 'none';
+            document.getElementById('account-section').style.display = 'none';
+        }
+        
+        function selectRestaurant(name) {
+            selectedRestaurant = name;
+            alert(`Вы выбрали ресторан: ${name}`);
+            
+            // Update radio button in cart modal
+            const radios = document.querySelectorAll('input[name="restaurant"]');
+            radios.forEach(radio => {
+                if (radio.value === name) {
+                    radio.checked = true;
+                }
+            });
+        }
+        
+        // Account tabs
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('account-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName('account-tab');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // Show current tab and mark as active
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Filter menu by category
+        function filterMenu(category) {
+            const products = document.querySelectorAll('.product-card');
+            const categories = document.querySelectorAll('.menu-category');
+            
+            // Update active category
+            categories.forEach(cat => {
+                if (cat.textContent.toLowerCase().includes(category) {
+                    cat.classList.add('active');
+                } else {
+                    cat.classList.remove('active');
+                }
+            });
+            
+            // Show/hide products
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
