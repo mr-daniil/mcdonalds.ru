@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Макдональдс — Официальный сайт</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FFC72C;
+            --secondary: #DA291C;
+            --dark: #27251F;
+            --light: #FFFFFF;
+            --gray: #F5F5F5;
+            --text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .main-header {
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 10px;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 5px 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .auth-btn {
+            padding: 8px 20px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background-color: #e6b722;
+        }
+        
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 20px;
+            color: var(--dark);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://example.com/mcd-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            white-space: nowrap;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--light);
+            border-color: var(--light);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        /* Menu Section */
+        .menu-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            color: var(--secondary);
+        }
+        
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background-color: var(--gray);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .category-btn.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .product-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .product-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+        
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--secondary);
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #e6b722;
+        }
+        
+        /* Restaurants Section */
+        .restaurants-section {
+            padding: 60px 0;
+            background-color: var(--gray);
+        }
+        
+        .restaurants-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .restaurant-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .restaurant-image {
+            height: 200px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .restaurant-info {
+            padding: 20px;
+        }
+        
+        .restaurant-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .restaurant-address {
+            color: #666;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .restaurant-address i {
+            margin-right: 8px;
+            color: var(--secondary);
+        }
+        
+        .restaurant-hours {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .restaurant-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .route-btn {
+            padding: 8px 15px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .call-btn {
+            padding: 8px 15px;
+            background-color: white;
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        /* Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background-color: var(--light);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cart-modal.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            padding: 20px;
+            background-color: var(--secondary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .cart-items {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background-color: var(--gray);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity {
+            margin: 0 10px;
+        }
+        
+        .remove-item {
+            margin-left: auto;
+            color: #999;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .cart-total {
+            padding: 20px;
+            background-color: var(--gray);
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .total-price {
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--secondary);
+        }
+        
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            background-color: #e6b722;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .modal-title {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #c02116;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+            
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .restaurants-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin: 15px 0;
+            }
+            
+            .header-actions {
+                margin: 15px auto;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div>Макдональдс возвращается в Россию! Первые рестораны откроются в Москве 1 июня 2025</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/McDonald%27s_Golden_Arches.svg/1200px-McDonald%27s_Golden_Arches.svg.png" alt="McDonald's">
+                        <span class="logo-text">Макдональдс</span>
+                    </div>
+                    
+                    <nav>
+                        <ul>
+                            <li><a href="#menu">Меню</a></li>
+                            <li><a href="#restaurants">Рестораны</a></li>
+                            <li><a href="#about">О компании</a></li>
+                            <li><a href="#news">Новости</a></li>
+                            <li><a href="#contacts">Контакты</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <div class="header-actions">
+                        <button class="auth-btn" id="login-btn">Войти</button>
+                        <button class="cart-btn">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Мы возвращаемся!</h1>
+                <p>В 2025 году Макдональдс снова открывает рестораны в России с любимым вкусом и новыми стандартами качества.</p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn">Посмотреть меню</a>
+                    <a href="#restaurants" class="btn btn-secondary">Найти ресторан</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <h2 class="section-title">Наше меню</h2>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">Все</button>
+                <button class="category-btn" data-category="burgers">Бургеры</button>
+                <button class="category-btn" data-category="chicken">Курица</button>
+                <button class="category-btn" data-category="snacks">Закуски</button>
+                <button class="category-btn" data-category="desserts">Десерты</button>
+                <button class="category-btn" data-category="drinks">Напитки</button>
+            </div>
+            
+            <div class="products">
+                <!-- Big Mac -->
+                <div class="product-card" data-category="burgers">
+                    <div class="product-image" style="background-image: url('https://example.com/big-mac.jpg');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Биг Мак</h3>
+                        <p class="product-description">Легендарный сэндвич с двумя рублеными бифштексами, специальным соусом, сыром, салатом, луком и маринованными огурчиками.</p>
+                        <div class="product-footer">
+                            <span class="product-price">249 ₽</span>
+                            <button class="add-to-cart" data-id="1" data-name="Биг Мак" data-price="249" data-image="https://example.com/big-mac.jpg">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chicken Mac -->
+                <div class="product-card" data-category="chicken">
+                    <div class="product-image" style="background-image: url('https://example.com/chicken-mac.jpg');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Чикен Мак</h3>
+                        <p class="product-description">Нежное куриное филе в хрустящей панировке с соусом барбекю, свежим салатом и мягкой булочкой.</p>
+                        <div class="product-footer">
+                            <span class="product-price">199 ₽</span>
+                            <button class="add-to-cart" data-id="2" data-name="Чикен Мак" data-price="199" data-image="https://example.com/chicken-mac.jpg">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fries -->
+                <div class="product-card" data-category="snacks">
+                    <div class="product-image" style="background-image: url('https://example.com/fries.jpg');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Картофель Фри</h3>
+                        <p class="product-description">Хрустящие ломтики золотистого картофеля с небольшим количеством соли. Большая порция.</p>
+                        <div class="product-footer">
+                            <span class="product-price">129 ₽</span>
+                            <button class="add-to-cart" data-id="3" data-name="Картофель Фри" data-price="129" data-image="https://example.com/fries.jpg">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- McFlurry -->
+                <div class="product-card" data-category="desserts">
+                    <div class="product-image" style="background-image: url('https://example.com/mcflurry.jpg');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">МакФлурри Орео</h3>
+                        <p class="product-description">Нежное мороженое с кусочками печенья Орео и воздушным кремом. Идеальный десерт.</p>
+                        <div class="product-footer">
+                            <span class="product-price">149 ₽</span>
+                            <button class="add-to-cart" data-id="4" data-name="МакФлурри Орео" data-price="149" data-image="https://example.com/mcflurry.jpg">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cheeseburger -->
+                <div class="product-card" data-category="burgers">
+                    <div class="product-image" style="background-image: url('https://example.com/cheeseburger.jpg');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Чизбургер</h3>
+                        <p class="product-description">Классический бургер с сочной говяжьей котлетой, кусочком сыра, луком, горчицей и кетчупом.</p>
+                        <div class="product-footer">
+                            <span class="product-price">89 ₽</span>
+                            <button class="add-to-cart" data-id="5" data-name="Чизбургер" data-price="89" data-image="https://example.com/cheeseburger.jpg">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nuggets -->
+                <div class="product-card" data-category="chicken">
+                    <div class="product-image" style="background-image: url('https://example.com/nuggets.jpg');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Наггетсы (6 шт.)</h3>
+                        <p class="product-description">Хрустящие куриные наггетсы с нежной куриной грудкой внутри. Подаются с соусом на выбор.</p>
+                        <div class="product-footer">
+                            <span class="product-price">159 ₽</span>
+                            <button class="add-to-cart" data-id="6" data-name="Наггетсы (6 шт.)" data-price="159" data-image="https://example.com/nuggets.jpg">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cola -->
+                <div class="product-card" data-category="drinks">
+                    <div class="product-image" style="background-image: url('https://example.com/cola.jpg');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Кока-Кола (0.5л)</h3>
+                        <p class="product-description">Освежающий газированный напиток. Подается охлажденным со льдом.</p>
+                        <div class="product-footer">
+                            <span class="product-price">99 ₽</span>
+                            <button class="add-to-cart" data-id="7" data-name="Кока-Кола (0.5л)" data-price="99" data-image="https://example.com/cola.jpg">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Apple Pie -->
+                <div class="product-card" data-category="desserts">
+                    <div class="product-image" style="background-image: url('https://example.com/apple-pie.jpg');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Яблочный пирожок</h3>
+                        <p class="product-description">Хрустящий пирожок с нежной яблочной начинкой и корицей. Идеально подходит к кофе.</p>
+                        <div class="product-footer">
+                            <span class="product-price">79 ₽</span>
+                            <button class="add-to-cart" data-id="8" data-name="Яблочный пирожок" data-price="79" data-image="https://example.com/apple-pie.jpg">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Restaurants Section -->
+    <section class="restaurants-section" id="restaurants">
+        <div class="container">
+            <h2 class="section-title">Наши рестораны</h2>
+            
+            <div class="restaurants-list">
+                <!-- Restaurant 1 -->
+                <div class="restaurant-card">
+                    <div class="restaurant-image" style="background-image: url('https://example.com/restaurant1.jpg');"></div>
+                    <div class="restaurant-info">
+                        <h3 class="restaurant-title">Макдональдс на Тверской</h3>
+                        <div class="restaurant-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Москва, ул. Тверская, 10</span>
+                        </div>
+                        <div class="restaurant-hours">
+                            <span>Пн-Чт: 08:00 - 23:00</span>
+                            <span>Пт-Вс: 08:00 - 00:00</span>
+                        </div>
+                        <div class="restaurant-actions">
+                            <button class="route-btn">Построить маршрут</button>
+                            <button class="call-btn">Позвонить</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Restaurant 2 -->
+                <div class="restaurant-card">
+                    <div class="restaurant-image" style="background-image: url('https://example.com/restaurant2.jpg');"></div>
+                    <div class="restaurant-info">
+                        <h3 class="restaurant-title">Макдональдс на Арбате</h3>
+                        <div class="restaurant-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Москва, ул. Арбат, 25</span>
+                        </div>
+                        <div class="restaurant-hours">
+                            <span>Пн-Вс: 09:00 - 23:00</span>
+                        </div>
+                        <div class="restaurant-actions">
+                            <button class="route-btn">Построить маршрут</button>
+                            <button class="call-btn">Позвонить</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Restaurant 3 -->
+                <div class="restaurant-card">
+                    <div class="restaurant-image" style="background-image: url('https://example.com/restaurant3.jpg');"></div>
+                    <div class="restaurant-info">
+                        <h3 class="restaurant-title">Макдональдс в Меге</h3>
+                        <div class="restaurant-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Москва, Химки, ул. Кирова, 15</span>
+                        </div>
+                        <div class="restaurant-hours">
+                            <span>Пн-Вс: 10:00 - 22:00</span>
+                        </div>
+                        <div class="restaurant-actions">
+                            <button class="route-btn">Построить маршрут</button>
+                            <button class="call-btn">Позвонить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Cart Modal -->
+    <div class="cart-modal">
+        <div class="cart-header">
+            <h3>Ваша корзина</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart-message" style="text-align: center; padding: 40px 0; color: #999;">
+                <i class="fas fa-shopping-bag" style="font-size: 40px; margin-bottom: 15px;"></i>
+                <p>Ваша корзина пуста</p>
+            </div>
+        </div>
+        <div class="cart-total" style="display: none;">
+            <div class="total-row">
+                <span>Итого:</span>
+                <span class="total-price">0 ₽</span>
+            </div>
+            <button class="checkout-btn">Оформить заказ</button>
+        </div>
+    </div>
+    
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h3 class="modal-title">Вход в аккаунт</h3>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="submit-btn">Войти</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="overlay"></div>
+    
+    <!-- Footer -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Макдональдс</h3>
+                    <ul>
+                        <li><a href="#about">О компании</a></li>
+                        <li><a href="#news">Новости</a></li>
+                        <li><a href="#career">Карьера</a></li>
+                        <li><a href="#franchise">Франчайзинг</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="tel:88005551010">8 800 555-10-10</a></li>
+                        <li><a href="mailto:info@mcdonalds.ru">info@mcdonalds.ru</a></li>
+                        <li><a href="#feedback">Обратная связь</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 McDonald's. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+      // Cart functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const cartBtn = document.querySelector('.cart-btn');
+    const closeCartBtn = document.querySelector('.close-cart');
+    const cartModal = document.querySelector('.cart-modal');
+    const overlay = document.querySelector('.overlay');
+    const addToCartBtns = document.querySelectorAll('.add-to-cart');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartTotal = document.querySelector('.cart-total');
+    const cartCount = document.querySelector('.cart-count');
+    const totalPriceElement = document.querySelector('.total-price');
+    const emptyCartMessage = document.querySelector('.empty-cart-message');
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    const loginBtn = document.getElementById('login-btn');
+    const loginModal = document.getElementById('login-modal');
+    const closeModalBtn = document.querySelector('.close-modal');
+    
+    let cart = [];
+    
+    // Toggle cart modal
+    cartBtn.addEventListener('click', () => {
+        cartModal.classList.add('open');
+        overlay.classList.add('active');
+    });
+    
+    closeCartBtn.addEventListener('click', () => {
+        cartModal.classList.remove('open');
+        overlay.classList.remove('active');
+    });
+    
+    overlay.addEventListener('click', () => {
+        cartModal.classList.remove('open');
+        overlay.classList.remove('active');
+        loginModal.classList.remove('active');
+    });
+    
+    // Login modal
+    loginBtn.addEventListener('click', () => {
+        loginModal.classList.add('active');
+        overlay.classList.add('active');
+    });
+    
+    closeModalBtn.addEventListener('click', () => {
+        loginModal.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+    
+    // Add to cart functionality
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const name = btn.getAttribute('data-name');
+            const price = parseFloat(btn.getAttribute('data-price'));
+            const image = btn.getAttribute('data-image');
+            
+            // Check if item already in cart
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    image,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            
+            // Show cart modal when adding first item
+            if (cart.length === 1) {
+                cartModal.classList.add('open');
+                overlay.classList.add('active');
+            }
+        });
+    });
+    
+    // Update cart UI
+    function updateCart() {
+        // Update cart count
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+        
+        // Update cart items
+        if (cart.length === 0) {
+            emptyCartMessage.style.display = 'block';
+            cartTotal.style.display = 'none';
+            cartItemsContainer.innerHTML = '';
+            cartItemsContainer.appendChild(emptyCartMessage);
+        } else {
+            emptyCartMessage.style.display = 'none';
+            cartTotal.style.display = 'block';
+            
+            let itemsHTML = '';
+            let totalPrice = 0;
+            
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+                
+                itemsHTML += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="cart-item-image" style="background-image: url('${item.image}')"></div>
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-title">${item.name}</h4>
+                            <div class="cart-item-price">${item.price} ₽</div>
+                            <div class="cart-item-actions">
+                                <button class="quantity-btn decrease">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn increase">+</button>
+                                <button class="remove-item"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItemsContainer.innerHTML = itemsHTML;
+            totalPriceElement.textContent = `${totalPrice} ₽`;
+            
+            // Add event listeners to new buttons
+            document.querySelectorAll('.decrease').forEach(btn => {
+                btn.addEventListener('click', decreaseQuantity);
+            });
+            
+            document.querySelectorAll('.increase').forEach(btn => {
+                btn.addEventListener('click', increaseQuantity);
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', removeItem);
+            });
+        }
+    }
+    
+    // Quantity handlers
+    function decreaseQuantity(e) {
+        const itemId = e.target.closest('.cart-item').getAttribute('data-id');
+        const item = cart.find(item => item.id === itemId);
+        
+        if (item.quantity > 1) {
+            item.quantity -= 1;
+        } else {
+            cart = cart.filter(item => item.id !== itemId);
+        }
+        
+        updateCart();
+    }
+    
+    function increaseQuantity(e) {
+        const itemId = e.target.closest('.cart-item').getAttribute('data-id');
+        const item = cart.find(item => item.id === itemId);
+        item.quantity += 1;
+        updateCart();
+    }
+    
+    function removeItem(e) {
+        const itemId = e.target.closest('.cart-item').getAttribute('data-id');
+        cart = cart.filter(item => item.id !== itemId);
+        updateCart();
+    }
+    
+    // Checkout
+    checkoutBtn.addEventListener('click', () => {
+        alert('Заказ оформлен! Сумма: ' + totalPriceElement.textContent);
+        cart = [];
+        updateCart();
+        cartModal.classList.remove('open');
+        overlay.classList.remove('active');
+    });
+    
+    // Login form
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        // Here would be actual login logic
+        alert(`Вход выполнен для ${email}`);
+        loginModal.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+    
+    // Category filtering
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const category = btn.getAttribute('data-category');
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                if (category === 'all' || product.getAttribute('data-category') === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    });
+});
